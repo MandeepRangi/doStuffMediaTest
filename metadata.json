@@ -1,0 +1,11 @@
+{
+  "title": "DoStuff",
+  "logo": "http://dostuffmedia.com/img/logo.png",
+  "pages": [
+    {"title": "Who", "path": "/who"},
+    {"title": "What", "path": "/what"},
+    {"title": "Where", "path": "/where"},
+    {"title": "How", "path": "/how"},
+    {"title": "Contact", "path": "/contact"}
+  ]
+}

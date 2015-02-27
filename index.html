@@ -4,12 +4,13 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" type="text/css" />
 
   <title>Backbone Boilerplate</title>
 
   <!-- Application styles. -->
   <!-- build:[href] /styles.min.css -->
-  <link rel="stylesheet" href="/app/styles/index.css">
+  <link rel="stylesheet" href="./app/styles/index.css">
   <!-- /build -->
 </head>
 
@@ -17,10 +18,24 @@
   <!-- Application container. -->
   <main role="main" id="main"></main>
 
+  <script type="text/template" id="home-template">
+      <h1>{{model.title}}</h1>
+      <img src="{{model.logo}}"></img>
+      <br>
+      {{#each model.pages}}
+        <a href="{{path}}">{{title}}</a><br>
+      {{/each}}
+      <br>
+      {{#each collection}}
+        <span>{{title}}</span>
+        <img src="{{image}}"></img>
+      {{/each}}
+  </script>
+
   <!-- Application source. -->
   <!-- build:[src] /source.min.js -->
-  <script src="/bower_components/requirejs/require.js"
-    data-main="/app/config"></script>
+  <script src="./bower_components/requirejs/require.js"
+    data-main="./app/config"></script>
   <!-- /build -->
 </body>
 </html>

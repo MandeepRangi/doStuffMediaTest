@@ -3,6 +3,7 @@ define(function(require, exports, module) {
 
   // External dependencies.
   var Backbone = require("backbone");
+  var Handlebars = require('handlebars');
 
   // Defining the application router.
   var Router = Backbone.Router.extend({
@@ -11,7 +12,45 @@ define(function(require, exports, module) {
     },
 
     index: function() {
-      console.log("Welcome to your / route.");
+      Backbone.HomeModel = Backbone.Model.extend({
+        url: 'metadata.json'
+      });
+
+      Backbone.Things = Backbone.Collection.extend({
+        url: 'things.json'
+      });
+
+      Backbone.HomeView = Backbone.View.extend({
+        template: Handlebars.compile($("#home-template").html()),
+
+        render: function() {
+          var templateData = {
+            model: this.model.toJSON(),
+            collection: this.collection.toJSON()
+          }
+          this.$el.html(this.template(templateData));
+        }
+      });
+
+      var homeModel = new Backbone.HomeModel();
+
+      var thingsCollection = new Backbone.Things();
+
+      homeModel.fetch({
+        success: function() {
+          thingsCollection.fetch({
+            success: function() {
+              var homeView = new Backbone.HomeView({
+                model: homeModel,
+                collection: thingsCollection
+              });
+              $("#main").html(homeView.el);
+              homeView.render();
+            }
+          })
+
+        }
+      });
     }
   });
 
